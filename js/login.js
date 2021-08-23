@@ -1,6 +1,20 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+document.getElementById("loginbutton").addEventListener("click", function() {
+    // hice click en el boton
+    //Controlo nombre pass
+
+
+    let usuarioLoggeado = document.getElementById("usuario").value;
+    let passLoggeada = document.getElementById("pass").value;
+
+    console.log(usuarioLoggeado)
+    console.log(passLoggeada)
+
+    if (usuarioLoggeado === "" || passLoggeada === "") {
+        alert("ingrese usuario y contraseña")
+        return;
+    }
+
+    sessionStorage.setItem("usuario-loggeado", usuarioLoggeado);
+    window.location.replace("index.html");
 
 });
