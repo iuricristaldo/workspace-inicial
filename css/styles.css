@@ -147,3 +147,11 @@ a.custom-card:hover {
 .checked {
     color: orange;
 }
+
+.user-logged {
+    color: #fff;
+}
+
+.logout-button {
+    color: black
+}
