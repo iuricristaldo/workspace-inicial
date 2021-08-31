@@ -35,22 +35,46 @@
 </head>
 
 <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <nav class="site-header navbar navbar-expand-lg sticky-top bg-dark d-flex">
 
-            <div type="input-group">
-                <input class="py-2 d-none d-md-inline-block" id="searchbar " type="search" />
-                <label class="form-label buscar" for="searchbar">Buscar</label>
-                <button type="button" class="btn btn-primary searchbarcolor"> <i class="fas fa-search searchbarcolor"></i> </button>
-            </div>
 
-            <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-            <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-            <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-            <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-            <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-            <div class="py-2 d-none d-md-inline-block user-logged" id="loggeduser"></div>
-            <input type="button" class="searchbarcolor" id="logout" value="Cerrar Sesión">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <div type="input-group">
+                        <input class="" id="searchbar " type="search" />
+                        <label class="form-label buscar" for="searchbar">Buscar</label>
+                        <button type="button" class="btn btn-primary searchbarcolor"> <i class="fas fa-search searchbarcolor"></i> </button>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav align-self-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Mi carrito</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="nav-link user-logged" id="loggeduser"></div>
+                </li>
+                <li>
+                    <input type="button" class="nav-link  searchbarcolor" id="logout" value="Cerrar Sesión">
+                </li>
+            </ul>
+
         </div>
     </nav>
     <div class="container">
