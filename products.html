@@ -18,7 +18,13 @@
 <body>
     <nav class="site-header sticky-top py-1 bg-dark">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <input class="py-2 d-none d-md-inline-block" type="search" />
+
+            <div type="input-group">
+                <input class="py-2 d-none d-md-inline-block" id="searchbar " type="search" />
+                <label class="form-label buscar" for="searchbar">Buscar</label>
+                <button type="button" class="btn btn-primary searchbarcolor"> <i class="fas fa-search searchbarcolor"></i> </button>
+            </div>
+
             <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
             <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
             <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>

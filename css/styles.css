@@ -155,3 +155,12 @@ a.custom-card:hover {
 .logout-button {
     color: black
 }
+
+.buscar {
+    color: #fff;
+}
+
+.searchbarcolor {
+    background-color: slategrey;
+    border-color: slategrey;
+}
