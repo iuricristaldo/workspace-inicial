@@ -1,6 +1,6 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_BY_SOLD_COUNT = "relevancia";
 const ORDER_ASC_BY_PRICE = "Menor-a-Mayor"
 const ORDER_DESC_BY_PRICE = "Mayor-a-Menor"
 
@@ -24,7 +24,7 @@ function sortProducts(criteria, array) {
             return 0;
         });
 
-    } else if (criteria === ORDER_BY_PROD_COUNT) {
+    } else if (criteria === ORDER_BY_SOLD_COUNT) {
         result = array.sort(function(a, b) {
             let aCount = parseInt(a.soldCount);
             let bCount = parseInt(b.soldCount);
@@ -39,26 +39,17 @@ function sortProducts(criteria, array) {
     } else if (criteria === ORDER_ASC_BY_PRICE) {
         result = array.sort(function(a, b) {
 
-            let aCost = parseInt(a.cost);
-            let bCost = parseInt(b.cost);
-            console.log(aCost)
-            console.log(bCost)
-
-            if (aCost < bCost) { return -1; }
-            if (aCost > bCost) { return 1; }
+            if (a.cost < b.cost) { return -1; }
+            if (a.cost > b.cost) { return 1; }
             return 0;
         });
 
     } else if (criteria === ORDER_DESC_BY_PRICE) {
         result = array.sort(function(a, b) {
 
-            let aCost = parseInt(a.cost);
-            let bCost = parseInt(b.cost);
-            console.log(aCost)
-            console.log(bCost)
 
-            if (aCost > bCost) { return -1; }
-            if (aCost < bCost) { return 1; }
+            if (a.cost > b.cost) { return -1; }
+            if (a.cost < b.cost) { return 1; }
             return 0;
         });
 
@@ -134,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     });
 
     document.getElementById("sortByCount").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
     });
 
     document.getElementById("sortDescPrice").addEventListener("click", function() {
