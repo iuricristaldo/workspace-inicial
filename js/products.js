@@ -25,33 +25,29 @@ function sortProducts(criteria, array) {
             return 0;
         });
 
-    } else if (criteria === ORDER_BY_SOLD_COUNT) {
+    } else if (criteria === ORDER_BY_SOLD_COUNT) { // Ordena a los productos según relevancia, De más vendidos a menos vendidos
         result = array.sort(function(a, b) {
-            let aCount = parseInt(a.soldCount);
-            let bCount = parseInt(b.soldCount);
-            console.log(aCount)
-            console.log(bCount)
 
-            if (aCount > bCount) { return -1; }
-            if (aCount < bCount) { return 1; }
+            if (a.soldCount > b.soldCount) { return -1; } // Si el "producto a" tiene mayor cantidad de artículos vendidos que el "producto b",  "producto a" se ubica antes en la lista 
+            if (a.soldCount < b.soldCount) { return 1; } // Si el "producto a" tiene menor cantidad de artículos vendidos que el "producto b",  "producto b" se ubica antes en la lista 
             return 0;
         });
 
-    } else if (criteria === ORDER_ASC_BY_PRICE) {
+    } else if (criteria === ORDER_ASC_BY_PRICE) { //ordena de menor precio a mayor precio a los productos.
         result = array.sort(function(a, b) {
 
-            if (a.cost < b.cost) { return -1; }
-            if (a.cost > b.cost) { return 1; }
-            return 0;
+            if (a.cost < b.cost) { return -1; } //Si el costo del "producto a" es menor al del "producto b", ubica al "producto a" antes en la lista.
+            if (a.cost > b.cost) { return 1; } //Si el costo del "producto a" es mayor al del "producto b", ubica al "producto b" antes en la lista.
+            return 0; //si ambos costos son iguales no se efectuan cambios en el orden
         });
 
-    } else if (criteria === ORDER_DESC_BY_PRICE) {
+    } else if (criteria === ORDER_DESC_BY_PRICE) { //ordena de mayor precio a menor precio a los productos
         result = array.sort(function(a, b) {
 
 
-            if (a.cost > b.cost) { return -1; }
-            if (a.cost < b.cost) { return 1; }
-            return 0;
+            if (a.cost > b.cost) { return -1; } //Si el costo del "producto a" es mayor al del "producto b", ubica al "producto a" antes en la lista.
+            if (a.cost < b.cost) { return 1; } //Si el costo del "producto a" es menor al del" producto b", ubica al "producto b" antes en la lista.
+            return 0; //si ambos costos son iguales no se efectuan cambios en el orden
         });
 
     }
@@ -66,12 +62,17 @@ function showProductsList() {
         let product = currentProductsArray[i];
 
 
-        const searchString = searchBar.value.toLowerCase();
+        const searchString = searchBar.value.toLowerCase(); //convierte el valor ingresado en la barra de búsqueda a minúscula
 
-        if (((minPrice == undefined) || (minPrice != undefined && product.cost >= minPrice)) && //
-            ((maxPrice == undefined) || (maxPrice != undefined && product.cost <= maxPrice)) &&
+
+        if (((minPrice == undefined) || (minPrice != undefined && product.cost >= minPrice)) && //Carga los elementos cuyo precio es >= minPrice, por defecto, o si no hay valor asignado no se filtra por precio mínimo
+            ((maxPrice == undefined) || (maxPrice != undefined && product.cost <= maxPrice)) && //Carga los elementos cuyo precio es <= maxnPrice, por defecto, o si no hay valor asignado no se filtra por precio máximo
             (product.name.toLowerCase().includes(searchString) || product.description.toLowerCase().includes(searchString) || searchString === "")) {
-
+            /* - product.name.toLowerCase() convierte el contenido de product.name a minúscula, si el string que ingresamos esta contenido en el nombre es filtrado 
+               - product.description.toLowerCase() convierte el contenido deproduct.description a minúscula, si el string que ingresamos esta contenido en la descripción es filtrado
+               - si el string es vacío se muestran todos los productos.
+               El filtro se ejecuta mediante eventos de tecleo "keyup" .
+             */
 
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -97,14 +98,14 @@ function showProductsList() {
     }
 }
 
-function sortAndShowProducts(sortCriteria, productsArray) {
+function sortAndShowProducts(sortCriteria, productsArray) { //función que toma como parámetro la lista de productos y un críterio de ordenamiento y devuelve la lista ordenada.
     currentSortCriteria = sortCriteria;
 
     if (productsArray != undefined) {
         currentProductsArray = productsArray;
     }
 
-    currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
+    currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray); //si la lista está definida le asigna un críterio de ordenamiento y la muestra. Por defecto está asignado ORDER_ASC_BY_NAME
 
     //Muestro los productos ordenados
     showProductsList();
@@ -121,54 +122,54 @@ document.addEventListener("DOMContentLoaded", function(e) {
     });
 
     document.getElementById("sortAsc").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_ASC_BY_NAME);
+        sortAndShowProducts(ORDER_ASC_BY_NAME); //Al clickear sobre el botón "A-Z", el parámetro currentSortCriteria de la función sortAndShowProducts() pasa a ser ORDER_ASC_BY_NAME. Se ordenan alfabéticamente los productos presentes en la lista.
     });
 
     document.getElementById("sortDesc").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_DESC_BY_NAME);
+        sortAndShowProducts(ORDER_DESC_BY_NAME); //Al clickear sobre el botón "Z-A", el parámetro currentSortCriteria de la función sortAndShowProducts() pasa a ser ORDER_DESC_BY_NAME. Se ordenan de la Z a la A los productos presentes en la lista.
     });
 
     document.getElementById("sortByCount").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT); //Al clickear el botón "Relevancia", el criterio de ordenamiento pasa a ser ORDER_BY_SOLD_COUNT.
     });
 
     document.getElementById("sortDescPrice").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_DESC_BY_PRICE);
+        sortAndShowProducts(ORDER_DESC_BY_PRICE); //Al hacer click sobre el botón "Mayor Precio" de id="sortDescPrice" se establece el criterio de ordenamiento ORDER_DESC_BY_PRICE, que ordena de mayor a menor precio los artículos. 
     });
 
     document.getElementById("sortAscPrice").addEventListener("click", function() {
-        sortAndShowProducts(ORDER_ASC_BY_PRICE);
+        sortAndShowProducts(ORDER_ASC_BY_PRICE); //Al hacer click sobre el botón "Menor Precio" de id="sortDescPrice" se establece el criterio de ordenamiento ORDER_ASC_BY_PRICE, que ordena de menor precio los artículos.
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function() {
-        document.getElementById("rangeFilterPriceMin").value = "";
-        document.getElementById("rangeFilterPriceMax").value = "";
+        document.getElementById("rangeFilterPriceMin").value = ""; // Establezco el valor "" al campo donde va el valor minimo
+        document.getElementById("rangeFilterPriceMax").value = ""; // Establezco el valor "" al campo donde va el valor máximo
 
         minPrice = undefined;
         maxPrice = undefined;
 
-        showProductsList();
+        showProductsList(); //Muestro la lista sin filtrar por precios
     });
 
     document.getElementById("rangeFilterPrice").addEventListener("click", function() {
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
-        minPrice = document.getElementById("rangeFilterPriceMin").value;
-        maxPrice = document.getElementById("rangeFilterPriceMax").value;
+        minPrice = document.getElementById("rangeFilterPriceMin").value; //Obtengo el valor del campo de id="rangeFilterPriceMin"
+        maxPrice = document.getElementById("rangeFilterPriceMax").value; //Obtengo valor del campo de id="rangeFilterPriceMax"
 
-        if ((minPrice != undefined) && (minPrice != "") && (minPrice) >= 0) {
+        if ((minPrice != undefined) && (minPrice != "") && (minPrice) >= 0) { //Si el valor ingresado en el campo de id="rangeFilterPriceMin" está definido y es >= que 0, minPrice toma ese valor
             minPrice = (minPrice);
         } else {
-            minPrice = undefined;
+            minPrice = undefined; //sino minPrice queda indefinido
         }
 
-        if ((maxPrice != undefined) && (maxPrice != "") && (maxPrice) >= 0) {
+        if ((maxPrice != undefined) && (maxPrice != "") && (maxPrice) >= 0) { //Si el valor ingresado en el campo de id="rangeFilterPriceMax" está definido y es >= que 0, minPrice toma ese valor
             maxPrice = (maxPrice);
         } else {
-            maxPrice = undefined;
+            maxPrice = undefined; //sino maxPrice queda indefinido
         }
 
-        showProductsList();
+        showProductsList(); //Se muestra la lista una vez aplicados los filtros cuando hago click en el botón Filtrar de id="rangeFilterPrice"
     });
 
     searchBar.addEventListener('keyup', function(e) {
