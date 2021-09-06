@@ -3,6 +3,7 @@ const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_SOLD_COUNT = "relevancia";
 const ORDER_ASC_BY_PRICE = "Menor-a-Mayor"
 const ORDER_DESC_BY_PRICE = "Mayor-a-Menor"
+const searchBar = document.getElementById("searchbar");
 
 var currentProductsArray = [];
 var currentSortCriteria = undefined;
@@ -59,15 +60,18 @@ function sortProducts(criteria, array) {
 }
 
 function showProductsList() {
-
+    //Agrega cada objeto de la lista JSON al DOM
     let htmlContentToAppend = "";
     for (let i = 0; i < currentProductsArray.length; i++) {
         let product = currentProductsArray[i];
 
-        let productCost = parseInt(product.cost);
 
-        if (((minPrice == undefined) || (minPrice != undefined && productCost >= minPrice)) &&
-            ((maxPrice == undefined) || (maxPrice != undefined && productCost <= maxPrice))) {
+        const searchString = searchBar.value.toLowerCase();
+
+        if (((minPrice == undefined) || (minPrice != undefined && product.cost >= minPrice)) && //
+            ((maxPrice == undefined) || (maxPrice != undefined && product.cost <= maxPrice)) &&
+            (product.name.toLowerCase().includes(searchString) || product.description.toLowerCase().includes(searchString) || searchString === "")) {
+
 
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -112,7 +116,7 @@ function sortAndShowProducts(sortCriteria, productsArray) {
 document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
-            sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
+            sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data); //por defecto le asigna el método de orden ORDER_ASC_BY_NAME cuando se cargan los datos de JSON a la página
         }
     });
 
@@ -152,18 +156,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
         minPrice = document.getElementById("rangeFilterPriceMin").value;
         maxPrice = document.getElementById("rangeFilterPriceMax").value;
 
-        if ((minPrice != undefined) && (minPrice != "") && (parseInt(minPrice)) >= 0) {
-            minPrice = parseInt(minPrice);
+        if ((minPrice != undefined) && (minPrice != "") && (minPrice) >= 0) {
+            minPrice = (minPrice);
         } else {
             minPrice = undefined;
         }
 
-        if ((maxPrice != undefined) && (maxPrice != "") && (parseInt(maxPrice)) >= 0) {
-            maxPrice = parseInt(maxPrice);
+        if ((maxPrice != undefined) && (maxPrice != "") && (maxPrice) >= 0) {
+            maxPrice = (maxPrice);
         } else {
             maxPrice = undefined;
         }
 
         showProductsList();
     });
+
+    searchBar.addEventListener('keyup', function(e) {
+        //Cuando tecleo búsqueda se ejecuta la función showProductsList(), al mismo tiempo se aplica el filtro de busqueda
+        showProductsList();
+
+    });
+
 });
