@@ -46,7 +46,7 @@ function showComments() {
     for (let i = 0; i < commentsArray.length; i++) {
         let comment = commentsArray[i];
         htmlContentToAppend += `
-        <div class="card" style="width: 18rem;">
+        <div class="card w-auto" >
         <div class="card-body">
             <h5 class="card-title">${comment.user}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${comment.dateTime}</h6>
@@ -107,7 +107,7 @@ document.getElementById("addComment").addEventListener("click", function() {
 
 
     htmltoappend = `
-    <div class="card" style="width: 18rem;">
+    <div class="card w-auto">
     <div class="card-body">
         <h5 class="card-title">${localStorage.getItem("usuario-loggeado")}</h5>
         <h6 class="card-subtitle mb-2 text-muted">${fecha}</h6>
