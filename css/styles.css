@@ -165,3 +165,7 @@ a.custom-card:hover {
     border-color: slategrey;
     color: #fff;
 }
+
+.stars {
+    color: orange
+}

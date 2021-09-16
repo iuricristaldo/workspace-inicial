@@ -13,6 +13,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -55,14 +56,100 @@
 
         </div>
     </nav>
-    <div class="container p-5">
-        <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-            <h4 class="alert-heading">¡A trabajar! :)</h4>
-            <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-            <hr>
-            <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <main role="main">
+        <div class="container mt-5">
+            <div class="text-center p-4">
+                <h2>Descripción del producto</h2>
+                <p class="lead">Encontrarás aquí toda la información acerca del producto seleccionado.</p>
+
+            </div>
+            <h3 id=""></h3>
+            <hr class="my-3">
+            <dl>
+                <dt>Nombre</dt>
+                <dd>
+                    <p id="productName"></p>
+                </dd>
+
+                <dt>Descripción</dt>
+                <dd>
+                    <p id="productDescription"></p>
+                </dd>
+
+                <dt>Precio</dt>
+                <dd>
+                    <p id="productPrice"></p>
+                </dd>
+
+                <dt>Cantidad de productos vendidos</dt>
+                <dd>
+                    <p id="soldCount"></p>
+                </dd>
+
+                <dt>Categoría</dt>
+                <dd>
+                    <p id="productCategory"></p>
+                </dd>
+
+                <dt>Imágenes ilustrativas</dt>
+                <dd>
+                    <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+                    </div>
+                </dd>
+
+                <dt>Comentarios</dt>
+                <dd>
+                    <div class="card-colums mx-auto" id="productComments">
+
+
+
+                    </div>
+                </dd>
+            </dl>
+
+            <div class="card">
+                <div class="row">
+
+                    <div class="col-10">
+                        <div class="comment-box ml-2">
+                            <h4>Agregar un comentario</h4>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Puntuación:</label>
+                                <select class="form-control stars" id="scoreSelected">
+                                  <option class="stars" value="1">★</option>
+                                  <option class="stars" value="2">★★</option>
+                                  <option class="stars" value="3">★★★</option>
+                                  <option class="stars" value="4">★★★★</option>
+                                  <option class="stars" value="5">★★★★★</option>
+                                </select>
+                            </div>
+
+
+
+
+
+                            <div class="comment-area">
+                                <textarea id="text-area" class="form-control" placeholder="Ingrese su comentario aquí" rows="2"></textarea>
+                            </div>
+                            <div class="mt-2">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary btn-sm" id="addComment">Comentar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
         </div>
-    </div>
+
+    </main>
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
