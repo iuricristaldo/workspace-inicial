@@ -48,14 +48,14 @@ function showComments() {
         let comment = commentsArray[i];
         htmlContentToAppend += `
         <div class="card w-auto" >
-        <div class="card-body">
-            <h5 class="card-title">${comment.user}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${comment.dateTime}</h6>
-            <p class="card-text">${comment.description}</p>
-            <p class="card-text" style="font-weight: bold;">Puntuación:</p>
-            <p class="card-link mt-auto ">${starScore(comment.score)}</p>            
+            <div class="card-body">
+                <h5 class="card-title">${comment.user}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${comment.dateTime}</h6>
+                <p class="card-text">${comment.description}</p>
+                <p class="card-text" style="font-weight: bold;">Puntuación:</p>
+                <p class="card-link mt-auto ">${starScore(comment.score)}</p>            
+            </div>
         </div>
-    </div>
         `
     }
 
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
             productNameHTML.innerHTML = product.name;
             productDescriptionHTML.innerHTML = product.description;
-            productPriceHTML.innerHTML = product.cost + " " + product.currency; /* Muestra el precio y la moneda dentro del tag asignado*/
+            productPriceHTML.innerHTML = product.cost + " " + product.currency; /* Muestra el precio y la moneda*/
             productSoldCountHTML.innerHTML = product.soldCount;
             productCategoryHTML.innerHTML = product.category;
 
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 });
 
 document.getElementById("addComment").addEventListener("click", function() {
-    /*Función que permite agregar comentarios al clickear sobre el botón comentar*/
+    /*Función que permite agregar comentarios al clickear sobre el botón comentar de id "addComment"*/
     let htmltoappend = "";
     let texto = document.getElementById("text-area").value;
     let date = new Date();
@@ -112,14 +112,14 @@ document.getElementById("addComment").addEventListener("click", function() {
 
     htmltoappend = `
     <div class="card w-auto">
-    <div class="card-body">
-        <h5 class="card-title">${localStorage.getItem("usuario-loggeado")}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${fecha}</h6>
-        <p class="card-text">${texto}</p>
-        <p class="card-text" style="font-weight: bold;">Puntuación:</p>
-        <p class="card-link mt-auto ">${starScore(commentScore)}</p>            
+        <div class="card-body">
+            <h5 class="card-title">${localStorage.getItem("usuario-loggeado")}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${fecha}</h6>
+            <p class="card-text">${texto}</p>
+            <p class="card-text" style="font-weight: bold;">Puntuación:</p>
+            <p class="card-link mt-auto ">${starScore(commentScore)}</p>            
+        </div>
     </div>
-</div>
     `;
 
     document.getElementById("productComments").innerHTML += htmltoappend;
