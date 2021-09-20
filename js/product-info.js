@@ -24,16 +24,23 @@ function showImagesGallery(array) {
     /*Agrega cada imagen a el html, el parámetro que toma para ejecutarse es el array: product.images , que contiene todas la imágenes del producto*/
     let htmlContentToAppend = "";
 
-    for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < 1; j++) {
+        const firstImg = array[j];
+
+        htmlContentToAppend += `
+        <div class="carousel-item active">
+           <img src="` + firstImg + `" class="d-block w-100" alt="...">
+        </div>`
+        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+    }
+
+    for (let i = 1; i < array.length; i++) {
         let imageSrc = array[i];
 
         htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
-            </div>
-        </div>
-        `
+        <div class="carousel-item ">
+           <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+        </div>`
 
         document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
     }
