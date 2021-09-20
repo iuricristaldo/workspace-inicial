@@ -84,7 +84,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
             let productPriceHTML = document.getElementById("productPrice");
             let productSoldCountHTML = document.getElementById("soldCount");
             let productCategoryHTML = document.getElementById("productCategory");
-            var relatedProductsArray = product.relatedProducts;
+            var relatedProductsArray = product.relatedProducts; //Array con los indices de losproductos relacionados [1,3]
+            var productsArray = []; //Array donde seran cargados los productos desde PRODUCTS_URL
 
             productNameHTML.innerHTML = product.name;
             productDescriptionHTML.innerHTML = product.description;
@@ -96,27 +97,29 @@ document.addEventListener("DOMContentLoaded", function(e) {
             showImagesGallery(product.images);
 
 
-            var productsArray = [];
+
             getJSONData(PRODUCTS_URL).then(function(result) {
                 if (result.status === "ok") {
                     productsArray = result.data;
 
+                    //For que recorre el array de los elementos presentes en el array de productos relacionados
                     for (let i = 0; i < relatedProductsArray.length; i++) {
                         const relatedProd = relatedProductsArray[i];
                         console.log(relatedProd)
 
                         let htmlContentToAppend = "";
+                        //For anidado que recorre el array de productos 
                         for (let j = 0; j < productsArray.length; j++) {
-                            const element = productsArray[j];
-                            console.log(element)
+                            const prod = productsArray[j];
+                            console.log(prod)
                             console.log(j === relatedProd)
-
+                                //Si el indice j del producto coincide con un producto relacionado (1 o 3) se agrega al HTML
                             if (j === relatedProd) {
                                 htmlContentToAppend += `
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="d-block mb-4 h-100">
                                     <img class="img-fluid img-thumbnail" src="` +
-                                    element.imgSrc + `" alt="">
+                                    prod.imgSrc + `" alt="">
                                 </div>
                             </div>`
 
