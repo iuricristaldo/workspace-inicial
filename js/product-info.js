@@ -23,7 +23,7 @@ function starScore(stars) {
 function showImagesGallery(array) {
     /*Agrega cada imagen a el html, el parámetro que toma para ejecutarse es el array: product.images , que contiene todas la imágenes del producto*/
     let htmlContentToAppend = "";
-
+    /*Agrega la primera imagen del array al carrusel */
     for (let j = 0; j < 1; j++) {
         const firstImg = array[j];
 
@@ -33,7 +33,7 @@ function showImagesGallery(array) {
         </div>`
         document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
     }
-
+    /* Agrega las demás imágenes del array al carrusel */
     for (let i = 1; i < array.length; i++) {
         let imageSrc = array[i];
 
@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
             let productPriceHTML = document.getElementById("productPrice");
             let productSoldCountHTML = document.getElementById("soldCount");
             let productCategoryHTML = document.getElementById("productCategory");
+            var relatedProductsArray = product.relatedProducts;
 
             productNameHTML.innerHTML = product.name;
             productDescriptionHTML.innerHTML = product.description;
@@ -91,7 +92,43 @@ document.addEventListener("DOMContentLoaded", function(e) {
             productSoldCountHTML.innerHTML = product.soldCount;
             productCategoryHTML.innerHTML = product.category;
 
+
             showImagesGallery(product.images);
+
+
+            var productsArray = [];
+            getJSONData(PRODUCTS_URL).then(function(result) {
+                if (result.status === "ok") {
+                    productsArray = result.data;
+
+                    for (let i = 0; i < relatedProductsArray.length; i++) {
+                        const relatedProd = relatedProductsArray[i];
+                        console.log(relatedProd)
+
+                        let htmlContentToAppend = "";
+                        for (let j = 0; j < productsArray.length; j++) {
+                            const element = productsArray[j];
+                            console.log(element)
+                            console.log(j === relatedProd)
+
+                            if (j === relatedProd) {
+                                htmlContentToAppend += `
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="d-block mb-4 h-100">
+                                    <img class="img-fluid img-thumbnail" src="` +
+                                    element.imgSrc + `" alt="">
+                                </div>
+                            </div>`
+
+                                document.getElementById("relatedProducts").innerHTML += htmlContentToAppend;
+                            }
+                        }
+                    }
+                }
+            });
+
+
+
         }
     });
 
