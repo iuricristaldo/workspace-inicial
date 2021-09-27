@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
                                 <div class="card" style="width: 18rem;">
                                 <img src="${prod.imgSrc}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                  <h5 class="card-title" style="font-weight: bold;">${prod.name}</h5>
+                                  <p class="card-ext" style="font-weight: bold;">${prod.name}</p>
                                   <p class="card-text">${prod.description}</p>
                                   <p class="card-text">${prod.cost} ${prod.currency}</p>
                                   <p class="card-text"><small class="text-muted">${prod.soldCount} artículos vendidos.</small></p>
