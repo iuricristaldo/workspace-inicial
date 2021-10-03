@@ -23,26 +23,29 @@ function starScore(stars) {
 function showImagesGallery(array) {
     /*Agrega cada imagen a el html, el parámetro que toma para ejecutarse es el array: product.images , que contiene todas la imágenes del producto*/
     let htmlContentToAppend = "";
-    /*Agrega la primera imagen del array al carrusel */
-    for (let j = 0; j < 1; j++) {
-        const firstImg = array[j];
 
-        htmlContentToAppend += `
-        <div class="carousel-item active">
-           <img src="` + firstImg + `" class="d-block w-100" alt="...">
-        </div>`
-        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
-    }
-    /* Agrega las demás imágenes del array al carrusel */
-    for (let i = 1; i < array.length; i++) {
+
+    for (let i = 0; i < array.length; i++) {
         let imageSrc = array[i];
 
-        htmlContentToAppend += `
-        <div class="carousel-item ">
-           <img src="` + imageSrc + `" class="d-block w-100" alt="...">
-        </div>`
 
-        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+        if (i === 0) {
+            htmlContentToAppend += `
+            <div class="carousel-item active">
+               <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+            </div>`
+            document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+
+        } else {
+            htmlContentToAppend += `
+            <div class="carousel-item ">
+                <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+            </div>`
+
+            document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+
+        }
+
     }
 };
 
